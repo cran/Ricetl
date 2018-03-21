@@ -1,0 +1,129 @@
+---
+title: "Ricetl tutorial"
+author: "Jing Xu"
+date: "`r Sys.Date()`"
+output:
+    rmarkdown::html_document:
+        toc: true
+        toc_depth: 2
+        toc_float: true
+        theme: lumen
+vignette: >
+  %\VignetteIndexEntry{Datastructures tutorial}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+<a href="https://github.com/DataXujing/Ricetl/"><img src="Ricetl_log.png" align="right" alt="logo" height="200" width="350" /></a>
+
+## Introduction 
+
+Ricetl implements a concise graphical user interface(GUI), You can complete all contains information extraction and ID card data processing (including missing value filling) for People's Republic of China ID card through the function `Ricetl()`, Just prepare a data file with a column of ID numbers (a file suffix name is one of .csv or .xlsx).At the same time, we provide 4 separate functions to extract ID number information, and a public data set about the corresponding rules of the first six digits and addresses of the ID number.More content can be seen in [GitHub](https://github.com/DataXujing/Ricetl)
+
+
+
+## The Coding Rules and Verification Code Implementation of China ID card
+
+### 1.Code rules for Chinese identity card number
+
++ Coding format: in 1999, China issued second generation identity card number, the citizenship number is 18, and will never change. The resident identity card format is as follows: ABCDEFYYYYMMDDXXXR
+
++ Address code (ABCDEF): the administrative division code (province, city or county) where the registered account is located. If the administrative divisions are reclassified, there may be inconsistent address codes in the same place. The administrative division code is carried out according to the provisions of GB/T2260.
+
+
++ The date of birth code (YYYYMMDD): represents the date of birth of the inhabitant, the 4 digit number in the year, the 2 digit number is used for the month and the day respectively, such as 19491001, and the birth date code is executed according to the provisions of GB/T 7408.
+
++ Order code (XXX) said: the same address code area, the sequence number of the same year, the same month, people born on the same day, their identity cards, according to their sequence of code can know: and we was born on the same day at least how many gay, and before we register the number of people. The odd number of identity cards is assigned to men, and even to women. That's why the second odd numbers are the boys, even the girls.
+
++ Check code (R): 17 bits before R are called ontology, and R is calculated according to the ontology code, according to the check code algorithm (ISO 7064:1983, MOD 11-2). When we enter the identity number for real name authentication, we can preliminarily judge whether the format of your ID number is correct.
+
+### 2.Check code algorithm
+
+Multiplied by the corresponding weighting factor and sum, divide the number by 11 to get the remainder, and check the check code by the remainder through the check code control table.
+
+The following table lists the weighting factors corresponding to the ID number and the final check code ratio table.
+
++ Identity card number weight factor table
+
+```{r,echo=FALSE}
+
+
+
+a <- c('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17')
+b <- c('7','9','10','5','8','4','2','2','6','3','7','9','10','5','8','4','2')
+dat <- data.frame(a,b)
+names(dat) <- c('位置序号','加权因子')
+dt <- data.frame(t(dat))
+knitr::kable(dt)
+```
+
+
+
++ A check table used to verify the authenticity of identity cards
+
+```{r,echo=F}
+
+c1 <- c(0,1,2,3,4,5,6,7,8,9,10)
+d <- c('1','0','X','9','8','7','6','5','4','3','2')
+dat1 <- data.frame(c1,d)
+names(dat1) <- c('余数','校验码')
+dt2 <-data.frame(t(dat1))
+
+knitr::kable(dt2)
+```
+
+## Ricetl Functions and Open Data Sets
+
+It mainly introduces 5 functions and a public set of data in the Ricetl package.
+
++ Ricetl()
+
+Library the Ricetl package, input Ricet() in the R terminal you can flip the ID number in batch, and extract the identity data.It provides a simple GUI interface.
+
+```r
+library(Ricetl)
+Ricetl()
+```
++ id2XX()
+
+id2XX() function group, which can be used to extract the full information in the ID card.
+
+```r
+library(Ricetl)
+x <- c('654003198111200241','341881197709275718','340503199401248097','469030199406204103','51110019')
+
+#age
+id2age(x)
+
+#gender
+id2gender(x)
+
+#address
+id2address(x)
+
+#Verifying the true and false
+id2verify(x)
+```
+
++ data(id_card6)
+
+The relationship between the first six bits of a common data set to match the ID number and the place names in China
+
+```r
+data(id_card6)
+```
+For more, see [GitHub](https://github.com/DataXujing/Ricetl)
+
+## Author
+
+Jing Xu [https://dataxujing.github.io/](https://dataxujing.github.io/)
