@@ -1,12 +1,12 @@
-7fc3e8286071811e841a20e883426be9 *DESCRIPTION
+91cfc8630f7574f995123a10c2f3859e *DESCRIPTION
 be5c94181789bcfd883221c2c5cf968c *NAMESPACE
 6ee358003cc4fe1533d1a11b64d7a9d8 *R/Ricetl.R
 c6e2fbc34756651f276c93462f2e17bf *README.md
-38c6c27e4906a72010b844b0bb1762a8 *build/vignette.rds
-05fa3dbb84cd925437eb18e61841c63c *data/id_card6.RData
-10f7a98bf249cef73d99bb2a9e3e5c9e *inst/doc/Ricetl-doc.R
+065367f4e21903bd8246ec2d0eee4cf1 *build/vignette.rds
+eb039189776a56ebcd676ecc09c1e307 *data/id_card6.RData
+2c2c4a4108e909d275fa94a25b73a012 *inst/doc/Ricetl-doc.R
 aced204943727bf6260c0868e18a9f98 *inst/doc/Ricetl-doc.Rmd
-6d39a7311d84756b2972bcd288885ca6 *inst/doc/Ricetl-doc.html
+db949119d1ec190e6af5b78cb7361e9a *inst/doc/Ricetl-doc.html
 ce496b1daf45405b54e479f60de6ce0a *man/Ricetl.Rd
 d9ad3e657f10b7b675e2355c8c26e28e *man/id2address.Rd
 e987d7f162825638ec13c5c7efe0a045 *man/id2age.Rd
